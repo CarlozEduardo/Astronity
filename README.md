@@ -1,1 +1,3 @@
-# Astronity
+# -------- Astronity --------
+
+<img src="../LOGO.png">
