@@ -27,7 +27,7 @@ hr {
 }
 
 .card {
-  width: 50%;
+  width: 40%;
   height: 85%;
   background-color: black;
   border-radius: 20px;
@@ -39,7 +39,7 @@ hr {
 }
 
 .card img {
-  width: 10%;
+  width: 20%;
 }
 
 .card .input input {

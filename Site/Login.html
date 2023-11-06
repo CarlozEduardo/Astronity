@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Astronity | Login</title>
+    <link rel="icon" href="Page/assets/LOGO.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;500&display=swap" rel="stylesheet">
@@ -27,7 +28,7 @@
             <hr>
             <button class="entrar" onclick="logar()">Entrar</button>
             <button class="recuperacao" onclick="recuperacao()">Esqueceu sua senha ?</button>
-            <span>Não tem uma conta? <a href="">Cadastre-se aqui !</a></span>
+            <span>Não tem uma conta? <a href="Cadastro.html">Cadastre-se aqui !</a></span>
         </div>
     </div>
 
@@ -38,7 +39,7 @@
     function logar() {
         var email = input_email.value;
         var senha = input_senha.value;
-        window.location.assign()
+        window.location.assign(index.html)
     }
     function recuperacao() {
         window.location.assign(recuperacao.html)
