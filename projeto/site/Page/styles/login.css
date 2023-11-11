@@ -15,7 +15,7 @@ video {
 }
 
 hr {
-  width: 90%;
+  width: 50%;
 }
 
 .main {
@@ -27,7 +27,7 @@ hr {
 }
 
 .card {
-  width: 50%;
+  width: 40%;
   height: 85%;
   background-color: black;
   border-radius: 20px;
@@ -39,25 +39,7 @@ hr {
 }
 
 .card img {
-  width: 15%;
-}
-
-.card .forms {
-  height: 50%;
-  width: 90%;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.card .forms .left-forms {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-.card .forms .right-forms {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  width: 20%;
 }
 
 .card .input input {
@@ -68,19 +50,19 @@ hr {
   background-color: rgb(50, 50, 50);
   text-align: center;
   font-size: 15px;
-}
-.card .input {
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
-.card .ending {
+.card .input span {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: white;
 }
 
-.card .ending .entrar {
+.card .entrar {
   height: 40px;
   width: 200px;
   border-radius: 10px;
@@ -90,7 +72,13 @@ hr {
   text-align: center;
   font-size: 15px;
 }
-.card .ending span {
-  width: 30%;
-  font-size: small;
+
+.card .recuperacao {
+  height: 40px;
+  width: 200px;
+  border-radius: 10px;
+  border: 2px white solid;
+  background-color: black;
+  text-align: center;
+  font-size: 15px;
 }

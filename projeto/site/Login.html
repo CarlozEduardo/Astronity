@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astronity | Login</title>
+    <link rel="icon" href="Page/assets/LOGO.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Page/styles/login.css">
+</head>
+
+<body>
+    <video src="Page/assets/background.mp4" autoplay loop muted></video>
+    <div class="main">
+        <div class="card">
+            <img src="Page/assets/LOGO.png">
+            <h1>Entrar no Astronity</h1>
+            <hr>
+            <div class="input">
+                <span>Digite seu email:</span>
+                <input id="input_email" type="text" placeholder="exemplo@email.com">
+            </div>
+            <div class="input">
+                <span>Digite sua senha:</span>
+                <input id="input_senha" type="password" placeholder="********">
+            </div>
+            <hr>
+            <button class="entrar" onclick="entrar()">Entrar</button>
+            <button class="recuperacao" onclick="recuperacao()">Esqueceu sua senha ?</button>
+            <span>Não tem uma conta? <a href="Cadastro.html">Cadastre-se aqui !</a></span>
+        </div>
+    </div>
+
+</body>
+
+</html>
+<script>
+    function recuperacao() {
+        window.location.assign(recuperacao.html)
+    }
+
+    function entrar() {
+
+        var emailVar = input_email.value;
+        var senhaVar = input_senha.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "";
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.idUsuario;
+                    sessionStorage.TELEFONE_USUARIO = json.telefone;
+                    sessionStorage.DATA_USUARIO = json.dtNasc;
+
+                    setTimeout(function () {
+                        window.location = "./dashboard/cards.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        mensagem_erro.style.color = "none"
+    }
+</script>

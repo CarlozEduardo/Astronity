@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astronity | Cadastro</title>
+    <link rel="icon" href="Page/assets/LOGO.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Page/styles/cadastro.css">
+</head>
+
+<body>
+    <video src="Page/assets/background.mp4" autoplay loop muted></video>
+    <div class="main">
+        <div class="card">
+            <img src="Page/assets/LOGO.png">
+            <h1>Cadastre-se</h1>
+            <hr>
+            <div class="forms">
+                <div class="left-forms">
+                    <div class="input">
+                        <span>Nome:</span>
+                        <input id="input_nome" type="text" placeholder="Astronity">
+                        <span class="mensagem_erro" id="erro_nome"></span>
+                    </div>
+                    <div class="input">
+                        <span>Crie uma senha:</span>
+                        <input id="input_senha" type="password" placeholder="********">
+                        <span class="mensagem_erro" id="erro_senha"></span>
+                    </div>
+                    <div class="input">
+                        <span>Telefone:</span>
+                        <input id="input_telefone" type="text" placeholder="1191234-1234">
+                        <span class="mensagem_erro" id="erro_telefone"></span>
+                    </div>
+                </div>
+                <div class="right-forms">
+                    <div class="input">
+                        <span>Email:</span>
+                        <input id="input_email" type="text" placeholder="teste@email.com">
+                        <span class="mensagem_erro" id="erro_email"></span>
+                    </div>
+                    <div class="input">
+                        <span>Repita a senha:</span>
+                        <input id="input_senha2" type="password" placeholder="********">
+                        <span class="mensagem_erro" id="erro_senha2"></span>
+                    </div>
+                    <div class="input">
+                        <span>Data de Nascimento:</span>
+                        <input id="input_dtNasc" type="date">
+                        <span class="mensagem_erro" id="erro_data"></span>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="ending">
+                <button class="entrar" onclick="cadastrar()">Cadastrar-se</button>
+                <span>Ao preencher o formulário acima você concorda com os nossos Termos de uso e nossa Política de
+                    privacidade.</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    function cadastrar() {
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nomeVar = input_nome.value;
+        var emailVar = input_email.value;
+        var senhaVar = input_senha2.value;
+        var confirmacaoSenhaVar = input_senha2.value;
+        var telefoneVar = input_telefone.value;
+        var dtNascVar = input_dtNasc.value;
+
+        if (
+            nomeVar == "" ||
+            emailVar == "" ||
+            senhaVar == "" ||
+            confirmacaoSenhaVar == "" ||
+            telefoneVar == "" ||
+            dtNascVar == ""
+        ) {
+            erro_nome.innerHTML =
+                "Algum campo está vazio!";
+        } else if (nomeVar <= 1) {
+            erro_nome.innerHTML =
+                "Nome com 1 ou menos caracteres";
+        } else if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".") == -1) {
+            erro_email.innerHTML =
+                "Email sem @ ou .";
+        } else if (senhaVar < 8) {
+            erro_senha.innerHTML =
+                "Senha no minimo 8 caracteres";
+        } else if (confirmacaoSenhaVar != senhaVar) {
+            erro_senha2.innerHTML =
+                "Senha diferente";
+        } else if (telefoneVar != 11) {
+            erro_telefone.innerHTML =
+                "Telefone tem que ter 11 caracteres";
+            finalizarAguardar();
+            return false;
+        } else {
+            setInterval(sumirMensagem, 5000);
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nomeVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+                telefoneServer: telefoneVar,
+                dtNascServer: dtNascVar
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+
+                    alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+
+                    setTimeout(() => {
+                        window.location = "Login.html";
+                    }, "2000");
+
+                    limparFormulario();
+                    finalizarAguardar();
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                finalizarAguardar();
+            });
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        mensagem_erro.style.color = "none";
+    }
+</script>
