@@ -4,10 +4,6 @@
   color: white;
 }
 
-body {
-  background-color: rgb(50, 50, 50);
-}
-
 video {
   width: 100%;
   position: fixed;
