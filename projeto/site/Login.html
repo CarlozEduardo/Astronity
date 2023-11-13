@@ -83,7 +83,7 @@
                     sessionStorage.DATA_USUARIO = json.dtNasc;
 
                     setTimeout(function () {
-                        window.location = "../forum.html";
+                        window.location.href = "Page/forum.html";
                     }, 1000); // apenas para exibir o loading
 
                 });
@@ -94,7 +94,7 @@
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
+                    //finalizarAguardar(texto);
                 });
             }
 
@@ -106,6 +106,6 @@
     }
 
     function sumirMensagem() {
-        mensagem_erro.style.color = "none"
+       // mensagem_erro.style.color = "none"
     }
 </script>

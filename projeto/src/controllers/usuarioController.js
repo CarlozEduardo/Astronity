@@ -9,31 +9,15 @@ function autenticar(req, res) {
   } else if (senha == undefined) {
     res.status(400).send("Sua senha está indefinida!");
   } else {
-    usuarioModel
-      .autenticar(email, senha)
+    usuarioModel.autenticar(email, senha)
       .then(function (resultadoAutenticar) {
         console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
         console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
 
         if (resultadoAutenticar.length == 1) {
           console.log(resultadoAutenticar);
-
-          // aquarioModel
-          //   .buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
-          //   .then((resultadoAquarios) => {
-          //     if (resultadoAquarios.length > 0) {
-          //       res.json({
-          //         idUsuario: resultadoAutenticar[0].idUsuario,
-          //         email: resultadoAutenticar[0].email,
-          //         nome: resultadoAutenticar[0].nome,
-          //         senha: resultadoAutenticar[0].senha,
-          //         telefone: resultadoAutenticar[0].telefone,
-          //         dtNasc: resultadoAutenticar[0].dtNasc,
-          //       });
-          //     } else {
-          //       res.status(204).json({ aquarios: [] });
-          //     }
-          //   });
+          res.json(resultadoAutenticar[0])
+          
         } else if (resultadoAutenticar.length == 0) {
           res.status(403).send("Email e/ou senha inválido(s)");
         } else {

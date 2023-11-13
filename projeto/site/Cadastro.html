@@ -16,7 +16,7 @@
     <video src="Page/assets/background.mp4" autoplay loop muted></video>
     <div class="main">
         <div class="card">
-            <img src="Page/assets/LOGO.png">
+            <a href="index.html"><img src="Page/assets/LOGO.png"></a>
             <h1>Cadastre-se</h1>
             <hr>
             <div class="forms">
@@ -33,7 +33,7 @@
                     </div>
                     <div class="input">
                         <span>Telefone:</span>
-                        <input id="input_telefone" type="text" placeholder="1191234-1234">
+                        <input id="input_telefone" type="text" placeholder="11 91234-1234">
                         <span class="mensagem_erro" id="erro_telefone"></span>
                     </div>
                 </div>
@@ -90,23 +90,21 @@
         ) {
             erro_nome.innerHTML =
                 "Algum campo está vazio!";
-        } else if (nomeVar <= 1) {
+        } else if (nomeVar.length <= 1) {
             erro_nome.innerHTML =
                 "Nome com 1 ou menos caracteres";
         } else if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".") == -1) {
             erro_email.innerHTML =
                 "Email sem @ ou .";
-        } else if (senhaVar < 8) {
+        } else if (senhaVar.length < 8) {
             erro_senha.innerHTML =
                 "Senha no minimo 8 caracteres";
         } else if (confirmacaoSenhaVar != senhaVar) {
             erro_senha2.innerHTML =
                 "Senha diferente";
-        } else if (telefoneVar != 11) {
+        } else if (telefoneVar.length != 11) {
             erro_telefone.innerHTML =
                 "Telefone tem que ter 11 caracteres";
-            finalizarAguardar();
-            return false;
         } else {
             setInterval(sumirMensagem, 5000);
         }
@@ -139,14 +137,12 @@
                     }, "2000");
 
                     limparFormulario();
-                    finalizarAguardar();
                 } else {
                     throw "Houve um erro ao tentar realizar o cadastro!";
                 }
             })
             .catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
-                finalizarAguardar();
             });
 
         return false;
