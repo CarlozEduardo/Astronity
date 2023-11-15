@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="Page/styles/home-page.css">
+    <link rel="stylesheet" href="Page/styles/index.css">
 </head>
 
 <body>
@@ -18,8 +18,9 @@
         <li>
             <ol><B>HOME PAGE</B></ol>
             <ol>EXPLORE</ol>
-            <a href="Login.html"><ol>LOGIN</ol></a>
-            <a href="Page/forum.html"><ol>FORUM</ol></a>
+            <a href="Page/forum.html">
+                <ol>FORUM</ol>
+            </a>
         </li>
     </div>
     <div class="main">
@@ -27,9 +28,43 @@
         <span>"Lembre-se de olhar para as estrelas e não para baixo, para os seus pés. Tente achar sentido no que você
             vê e pergunte sobre o que faz o UNIVERSO existir. Seja curioso." - Stephen Hawking</span>
     </div>
-    <div class="category">     
-            <h1>EXPLORE MAIS SOBRE O UNIVERSO</h1>
 
+    <div class="video">
+        <h1>AFINAL O QUE É O UNIVERSO?</h1>
+        <div class="container">
+            <div class="left">
+                <span>
+                    Na astronomia, o Universo corresponde ao conjunto de toda a matéria,
+                    energia, espaço e tempo existente.
+                    Ele reúne os astros: planetas, cometas, estrelas, galáxias, nebulosas, satélites, dentre outros.
+                    O universo é, portanto, mais que um local imenso, ele é tudo, e engloba tudo o que existe.
+                    Assista o vídeo a seguir para expandir seu conhecimento sobre o Universo:
+                </span>
+            </div>
+            <div class=" right-yt">
+                <h3> CIÊNCIA TODO DIA </h3>
+                <iframe class="video-yt" height="315"
+                    src="https://www.youtube.com/embed/8UqNVzY0EVg?si=HiC0RfVsR2l2d0Mm" title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="api-nasa">
+        <div class="imagem">
+            <img id="imagem-nasa" />
+        </div>
+        <div class="txt">
+            <h1 class="cor-letra">Foto astronômica do dia</h1>
+            <h3 class="cor-letra" id="title"></h3>
+            <p class="cor-letra" id="date"></p>
+        </div>
+    </div>
+
+    <div class="category">
+        <h1>EXPLORE MAIS SOBRE O UNIVERSO</h1>
         <div class="up">
             <div class="opt">
                 <span>SISTEMA SOLAR</span>
@@ -66,10 +101,12 @@
                 <img src="Page/assets/solar-system.png">
             </div>
         </div>
-    </div>
-    <div class="footer">
-        <span></span>
-    </div>
+        <div class="footer">
+              <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
+          </div>
 </body>
 
 </html>
+
+<script type="text/javascript" src="api-nasa/config.js"></script>
+<script src="api-nasa/app.js"></script>

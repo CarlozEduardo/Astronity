@@ -19,14 +19,35 @@ CONSTRAINT fkPost FOREIGN KEY (fkUsuario)
 REFERENCES usuario(idUsuario));
 
 CREATE TABLE comentario (
-idComentario INT PRIMARY KEY AUTO_INCREMENT,
+idComentario INT,
 descricao VARCHAR(100),
-fkUsuario INT,
+fkUsuarioComentario INT,
 fkPost INT,
-CONSTRAINT fkPerfil FOREIGN KEY (fkUsuario)
+fkUsuarioPost INT,
+FOREIGN KEY (fkUsuarioComentario)
 REFERENCES usuario(idUsuario),
-CONSTRAINT fkComentario FOREIGN KEY (fkPost)
-REFERENCES postagem(idPost));
+FOREIGN KEY (fkPost)
+REFERENCES postagem(idPost),
+FOREIGN KEY (fkUsuarioPost)
+REFERENCES postagem(fkUsuario),
+PRIMARY KEY (idComentario, fkUsuarioPost, fkPost, fkUsuarioComentario));
+
+CREATE TABLE avaliacao (
+    idAvaliacao INT PRIMARY KEY AUTO_INCREMENT,
+    nota DECIMAL(2,1),
+    descricao VARCHAR(255),
+    fkUsuario INT,
+    CONSTRAINT fkUsuarioAvaliacao FOREIGN KEY (fkUsuario)
+    REFERENCES usuario(idUsuario)
+);
+
+CREATE TABLE ocupacao (
+    idOcupacao INT,
+    ocupacao VARCHAR(20),
+    instituicao VARCHAR(50),
+    fkUsuario INT,
+    PRIMARY KEY(fkUsuario, idOcupacao)
+);
 
 SELECT * FROM usuario;
 
