@@ -58,18 +58,18 @@
         <div class="content-text">
             <div class="content-left">
                 <ol>
-                    <li>Mercúrio</li>
-                    <li>Vênus</li>
-                    <li>Terra</li>
-                    <li>Marte</li>
-                    <li>Júpiter</li>
-                    <li>Saturno</li>
-                    <li>Urano</li>
-                    <li>Netuno</li>
+                    <li><button onclick="mercurio()">Mercúrio</button> </li>
+                    <li><button onclick="venus()">Vênus</button></li>
+                    <li><button onclick="terra()">Terra</button></li>
+                    <li><button onclick="marte()">Marte</button></li>
+                    <li><button onclick="jupiter()">Júpiter</button></li>
+                    <li><button onclick="saturno()">Saturno</button></li>
+                    <li><button onclick="urano()">Urano</button></li>
+                    <li><button onclick="netuno()">Netuno</button></li>
                 </ol>
             </div>
-            <div class="content-right">
-                <img src="assets/mercurio.png">
+            <div id="planetas" class="content-right">
+                <span>Clique no nome do planeta que deseja ver.</span>
             </div>
         </div>
     </div>
@@ -80,3 +80,30 @@
 </body>
 
 </html>
+
+<script>
+    function mercurio(){
+        planetas.innerHTML = `<img src="assets/mercurio.png">`
+    }
+    function venus(){
+        planetas.innerHTML = `<img src="assets/venus.png">`
+    }
+    function terra(){
+        planetas.innerHTML = `<img src="assets/terra.png">`
+    }
+    function marte(){
+        planetas.innerHTML = `<img src="assets/marte.png">`
+    }
+    function jupiter(){
+        planetas.innerHTML = `<img src="assets/jupiter.png">`
+    }
+    function saturno(){
+        planetas.innerHTML = `<img src="assets/saturno.png">`
+    }
+    function urano(){
+        planetas.innerHTML = `<img src="assets/urano.png">`
+    }
+    function netuno(){
+        planetas.innerHTML = `<img src="assets/netuno.png">`
+    }
+</script>

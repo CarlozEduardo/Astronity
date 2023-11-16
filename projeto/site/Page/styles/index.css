@@ -2,6 +2,7 @@
     margin: 0;
     font-family: "Poppins", sans-serif;
     color: white;
+    scroll-behavior: smooth;
 }
 
 /* HEADER CSS */
