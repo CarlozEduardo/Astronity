@@ -75,6 +75,8 @@ li {
 }
 
 .content .content-text {
+    width: 100%;
+    height: 50%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -98,8 +100,16 @@ li {
     align-items: center;
 }
 
+
+.content .content-text .content-left button {
+    width: 100px;
+    background-color: black;
+    border-radius: 10%;
+}
+
 .content .content-text .content-right img {
-    width: 90%;
+    width: 55%;
+    height: 90%;
 }
 
 /* FOOTER */

@@ -55,13 +55,13 @@
         <div class="content-text">
             <div class="content-left">
                 <ol>
-                    <li>VY Canis Majoris</li>
-                    <li>WOH G64</li>
-                    <li>V354 Cephei</li>
+                    <li><button onclick="estrela1()">VY Canis Majoris</button></li>
+                    <li><button onclick="estrela2()">WOH G64</button></li>
+                    <li><button onclick="estrela3()">V354 Cephei</button></li>
                 </ol>
             </div>
-            <div class="content-right">
-                <img src="assets/mercurio.png">
+            <div id="estrelas" class="content-right">
+                <span>Clique no nome da estrela que deseja ver.</span>
             </div>
         </div>
     </div>
@@ -72,3 +72,17 @@
 </body>
 
 </html>
+
+<script>
+    function estrela1() {
+        estrelas.innerHTML = `<img src="assets/estrela1.png">`
+    }
+
+    function estrela2() {
+        estrelas.innerHTML = `<img src="assets/estrela2.png">`
+    }
+
+    function estrela3() {
+        estrelas.innerHTML = `<img src="assets/estrela3.png">`
+    }
+</script>
