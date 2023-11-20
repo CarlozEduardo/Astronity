@@ -42,7 +42,7 @@ li {
 .main {
     width: 100%;
     height: 600px;
-    background-image: url(../assets/background-estrelas.png);
+    background-image: url(../assets/background-asteroides.png);
     background-repeat: no-repeat;
     background-position: center;
     display: flex;

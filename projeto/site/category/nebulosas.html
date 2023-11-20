@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEBULOSAS</title>
+    <link rel="icon" href="../Page/assets/LOGO-HOMEPAGE.png">
+    <link rel="stylesheet" href="style/nebolusas.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+        <img src="../Page/assets/LOGO-HOMEPAGE.png">
+        <ul>
+            <a href="../index.html">
+                <li>HOME PAGE</li>
+            </a>
+            <li><a href="../index.html#explore">EXPLORE</a></li>
+            <a href="../Page/forum.html">
+                <li>FORUM</li>
+            </a>
+        </ul>
+    </div>
+
+    <div class="main">
+        <span>" No interior de uma nebulosa o Universo encontrou as condições perfeitas para semear estrelas, e
+            presentear-nos com um dos mais belos espetáculos já visto. Seja a olho nu ou não.
+            " - Edna Frigato
+        </span>
+    </div>
+
+    <div class="content">
+        <h1>O QUE SÃO SUPERNOVAS?</h1>
+        <div class="content-text">
+            <div class="content-right">
+                <span>
+                    Uma supernova é um corpo celeste que teve origem após a explosão de uma estrela cuja massa é
+                    aproximadamente 10 vezes superior à massa do Sol. O brilho causado pela explosão de uma supernova
+                    pode demorar semanas ou até meses a desaparecer. As supernovas representam o começo da fase final da
+                    evolução das estrelas de grande massa.
+                </span>
+            </div>
+            <div class="content-left">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/BPKAdgv6XUM?si=O_t2xj7nIY-GSDiq"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>ALGUMAS NEBULOSAS</h1>
+        <div class="content-text">
+            <div class="content-left">
+                <ol>
+                    <li><button onclick="nebulosa1()">Pilares da Criação</button></li>
+                    <li><button onclick="nebulosa2()">Caranguejo</button></li>
+                    <li><button onclick="nebulosa3()">Cabeça de Cavalo</button></li> <br>
+                    <li><button onclick="nebulosarandom()">Nebulosa Aleatoria</button></li>
+                    <li><button onclick="todasNebulosas()">Clique Aqui!</button></li>
+                </ol>
+            </div>
+            <div id="nebulosas" class="content-right">
+                <span>Clique no botão!</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
+    </div>
+</body>
+</html>
+
+<script>
+    var listaNebulosas = [
+    `<img src="assets/nebulosa1.png">`,
+    `<img src="assets/nebulosa2.png">`,
+    `<img src="assets/nebulosa3.png">`
+    ]
+
+    function nebulosa1() {
+        nebulosas.innerHTML = listaNebulosas[0];
+    }
+    
+    function nebulosa2() {
+        nebulosas.innerHTML = listaNebulosas[1];
+    }
+    
+    function nebulosa3() {
+        nebulosas.innerHTML = listaNebulosas[2];
+    }
+
+    function nebulosarandom() {
+        var NumeroRandom = Math.random();
+        var imagem = parseInt(NumeroRandom * 3);
+
+        nebulosas.innerHTML = listaNebulosas[imagem]
+    }
+
+    function todasNebulosas() {
+        for (let imagem = 0; imagem < listaNebulosas.length; imagem++) {
+        setTimeout(function () {
+        nebulosas.innerHTML = listaNebulosas[imagem];
+        }, 3000 * imagem);
+        }
+    }
+</script>

@@ -19,7 +19,7 @@
             <a href="../index.html">
                 <li>HOME PAGE</li>
             </a>
-            <li>EXPLORE</li>
+            <li><a href="../index.html#explore">EXPLORE</a></li>
             <a href="../Page/forum.html">
                 <li>FORUM</li>
             </a>
@@ -65,11 +65,13 @@
                     <li><button onclick="jupiter()">Júpiter</button></li>
                     <li><button onclick="saturno()">Saturno</button></li>
                     <li><button onclick="urano()">Urano</button></li>
-                    <li><button onclick="netuno()">Netuno</button></li>
+                    <li><button onclick="netuno()">Netuno</button></li> <br>
+                    <li><button onclick="planetarandom()">Planeta Aleatorio</button></li>
+                    <li><button onclick="todososplanetas()">Clique aqui!</button></li>
                 </ol>
             </div>
             <div id="planetas" class="content-right">
-                <span>Clique no nome do planeta que deseja ver.</span>
+                <span>Clique no botão!</span>
             </div>
         </div>
     </div>
@@ -82,28 +84,48 @@
 </html>
 
 <script>
+    var listaPlanetas = 
+    [`<img src="assets/mercurio.png">`, `<img src="assets/venus.png">`, `<img src="assets/terra.png">`, 
+    `<img src="assets/marte.png">`, `<img src="assets/jupiter.png">`, `<img src="assets/saturno.png">`,
+    `<img src="assets/urano.png">`, `<img src="assets/netuno.png">`]
+
     function mercurio(){
-        planetas.innerHTML = `<img src="assets/mercurio.png">`
+        planetas.innerHTML = listaPlanetas[0];
     }
     function venus(){
-        planetas.innerHTML = `<img src="assets/venus.png">`
+        planetas.innerHTML = listaPlanetas[1];
     }
     function terra(){
-        planetas.innerHTML = `<img src="assets/terra.png">`
+        planetas.innerHTML = listaPlanetas[2];
     }
     function marte(){
-        planetas.innerHTML = `<img src="assets/marte.png">`
+        planetas.innerHTML = listaPlanetas[3];
     }
     function jupiter(){
-        planetas.innerHTML = `<img src="assets/jupiter.png">`
+        planetas.innerHTML = listaPlanetas[4];
     }
     function saturno(){
-        planetas.innerHTML = `<img src="assets/saturno.png">`
+        planetas.innerHTML = listaPlanetas[5];
     }
     function urano(){
-        planetas.innerHTML = `<img src="assets/urano.png">`
+        planetas.innerHTML = listaPlanetas[6];
     }
     function netuno(){
-        planetas.innerHTML = `<img src="assets/netuno.png">`
+        planetas.innerHTML = listaPlanetas[7];
+    }
+
+    function planetarandom() {
+        var NumeroRandom = Math.random();
+        var imagem = parseInt(NumeroRandom * 8);
+
+        planetas.innerHTML = listaPlanetas[imagem];
+    }
+
+    function todososplanetas() {
+        for (let imagem = 0; imagem < listaPlanetas.length; imagem++) {
+        setTimeout(function () {
+        planetas.innerHTML = listaPlanetas[imagem];
+        }, 3000 * imagem);
+    }   
     }
 </script>

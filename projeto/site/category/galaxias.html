@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GALÁXIAS</title>
+    <link rel="icon" href="../Page/assets/LOGO-HOMEPAGE.png">
+    <link rel="stylesheet" href="style/galaxias.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+        <img src="../Page/assets/LOGO-HOMEPAGE.png">
+        <ul>
+            <a href="../index.html">
+                <li>HOME PAGE</li>
+            </a>
+            <li><a href="../index.html#explore">EXPLORE</a></li>
+            <a href="../Page/forum.html">
+                <li>FORUM</li>
+            </a>
+        </ul>
+    </div>
+
+    <div class="main">
+        <span>"A beleza da galáxia reside em sua complexidade e no desafio constante de desvendar seus mistérios." -
+            Edwin Hubble
+        </span>
+    </div>
+
+    <div class="content">
+        <h1>O QUE SÃO GALÁXIAS?</h1>
+        <div class="content-text">
+            <div class="content-right">
+                <span>
+                    "Galáxias são sistemas formados por uma vasta quantidade de estrelas, poeira, gases e matéria
+                    escura. Esse conjunto de elementos é unido pela força da gravidade. Algumas galáxias, em especial
+                    aquelas de maiores dimensões, possuem grandes buracos negros no seu centro, como é o caso daquela em
+                    que vivemos, a Via Láctea."
+                </span>
+            </div>
+            <div class="content-left">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/5xZ5H97uLAs?si=KQ2JmkjUOtKo5-q0"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>ALGUMAS GALÁXIAS</h1>
+        <div class="content-text">
+            <div class="content-left">
+                <ol>
+                    <li><button onclick="galaxia1()">Via Láctea</button></li>
+                    <li><button onclick="galaxia2()">Andrômeda</button></li>
+                    <li><button onclick="galaxia3()">Triângulo</button></li> <br>
+                    <li><button onclick="galaxiarandom()">Galáxia Aleatoria</button></li>
+                    <li><button onclick="todasGalaxias()">Clique Aqui!</button></li>
+                </ol>
+            </div>
+            <div id="galaxias" class="content-right">
+                <span>Clique no botão!</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
+    </div>
+</body>
+
+</html>
+
+<script>
+    var listaGalaxias = [
+        `<img src="assets/galaxia1.png">`,
+        `<img src="assets/galaxia2.png">`,
+        `<img src="assets/galaxia3.png">`
+    ]
+
+    function galaxia1() {
+        galaxias.innerHTML = listaGalaxias[0];
+    }
+
+    function galaxia2() {
+        galaxias.innerHTML = listaGalaxias[1];
+    }
+
+    function galaxia3() {
+        galaxias.innerHTML = listaGalaxias[2];
+    }
+
+    function galaxiarandom() {
+        var NumeroRandom = Math.random();
+        var imagem = parseInt(NumeroRandom * 3);
+
+        galaxias.innerHTML = listaGalaxias[imagem]
+    }
+
+    function todasGalaxias() {
+        for (let imagem = 0; imagem < listaGalaxias.length; imagem++) {
+            setTimeout(function () {
+                galaxias.innerHTML = listaGalaxias[imagem];
+            }, 3000 * imagem);
+        }
+    }
+</script>

@@ -172,6 +172,7 @@
 }
 
 .category img {
+    height: 150px;
     width: 250px;
     border-radius: 25px;
 }

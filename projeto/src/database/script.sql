@@ -50,6 +50,3 @@ CREATE TABLE ocupacao (
 );
 
 SELECT * FROM usuario;
-
-INSERT INTO usuario (nome, email, senha, telefone, dtNasc) VALUES
- ('teste', 'abc@teste.com', 'senha123', '12345678900', '2004-10-31');
