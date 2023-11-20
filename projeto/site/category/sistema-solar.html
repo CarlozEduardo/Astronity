@@ -44,12 +44,12 @@
                 </span>
             </div>
             <div class="content-left">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/SpcPB_lzCxc?si=6_YbJv6hkK5MWDT8"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen>
-            </iframe>
-        </div>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/SpcPB_lzCxc?si=6_YbJv6hkK5MWDT8"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
         </div>
     </div>
 
@@ -84,33 +84,33 @@
 </html>
 
 <script>
-    var listaPlanetas = 
-    [`<img src="assets/mercurio.png">`, `<img src="assets/venus.png">`, `<img src="assets/terra.png">`, 
-    `<img src="assets/marte.png">`, `<img src="assets/jupiter.png">`, `<img src="assets/saturno.png">`,
-    `<img src="assets/urano.png">`, `<img src="assets/netuno.png">`]
+    var listaPlanetas =
+        [`<img src="assets/mercurio.png">`, `<img src="assets/venus.png">`, `<img src="assets/terra.png">`,
+            `<img src="assets/marte.png">`, `<img src="assets/jupiter.png">`, `<img src="assets/saturno.png">`,
+            `<img src="assets/urano.png">`, `<img src="assets/netuno.png">`]
 
-    function mercurio(){
+    function mercurio() {
         planetas.innerHTML = listaPlanetas[0];
     }
-    function venus(){
+    function venus() {
         planetas.innerHTML = listaPlanetas[1];
     }
-    function terra(){
+    function terra() {
         planetas.innerHTML = listaPlanetas[2];
     }
-    function marte(){
+    function marte() {
         planetas.innerHTML = listaPlanetas[3];
     }
-    function jupiter(){
+    function jupiter() {
         planetas.innerHTML = listaPlanetas[4];
     }
-    function saturno(){
+    function saturno() {
         planetas.innerHTML = listaPlanetas[5];
     }
-    function urano(){
+    function urano() {
         planetas.innerHTML = listaPlanetas[6];
     }
-    function netuno(){
+    function netuno() {
         planetas.innerHTML = listaPlanetas[7];
     }
 
@@ -123,9 +123,9 @@
 
     function todososplanetas() {
         for (let imagem = 0; imagem < listaPlanetas.length; imagem++) {
-        setTimeout(function () {
-        planetas.innerHTML = listaPlanetas[imagem];
-        }, 3000 * imagem);
-    }   
+            setTimeout(function () {
+                planetas.innerHTML = listaPlanetas[imagem];
+            }, 3000);
+        }
     }
 </script>

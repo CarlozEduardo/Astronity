@@ -75,23 +75,24 @@
         <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
     </div>
 </body>
+
 </html>
 
 <script>
     var listaNebulosas = [
-    `<img src="assets/nebulosa1.png">`,
-    `<img src="assets/nebulosa2.png">`,
-    `<img src="assets/nebulosa3.png">`
+        `<img src="assets/nebulosa1.png">`,
+        `<img src="assets/nebulosa2.png">`,
+        `<img src="assets/nebulosa3.png">`
     ]
 
     function nebulosa1() {
         nebulosas.innerHTML = listaNebulosas[0];
     }
-    
+
     function nebulosa2() {
         nebulosas.innerHTML = listaNebulosas[1];
     }
-    
+
     function nebulosa3() {
         nebulosas.innerHTML = listaNebulosas[2];
     }
@@ -105,9 +106,9 @@
 
     function todasNebulosas() {
         for (let imagem = 0; imagem < listaNebulosas.length; imagem++) {
-        setTimeout(function () {
-        nebulosas.innerHTML = listaNebulosas[imagem];
-        }, 3000 * imagem);
+            setTimeout(function () {
+                nebulosas.innerHTML = listaNebulosas[imagem];
+            }, 3000);
         }
     }
 </script>

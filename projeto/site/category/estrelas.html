@@ -27,10 +27,11 @@
     </div>
 
     <div class="main">
-        <span>"Olhar para o céu estrelado nos faz lembrar o quão pequenos somos, o quão pouco sabemos e o quão vasto é tudo isso." - Cika Parolin
+        <span>"Olhar para o céu estrelado nos faz lembrar o quão pequenos somos, o quão pouco sabemos e o quão vasto é
+            tudo isso." - Cika Parolin
         </span>
     </div>
-    
+
     <div class="content">
         <h1>O CICLO DE VIDA DAS ESTRELAS</h1>
         <div class="content-text">
@@ -78,7 +79,7 @@
 
 <script>
     var listaImagens = [
-        `<img src="assets/estrela1.png">`,`<img src="assets/estrela2.png">`, `<img src="assets/estrela3.png">`
+        `<img src="assets/estrela1.png">`, `<img src="assets/estrela2.png">`, `<img src="assets/estrela3.png">`
     ]
     function estrela1() {
         estrelas.innerHTML = listaImagens[0]
@@ -101,9 +102,9 @@
 
     function todasEstrelas() {
         for (let imagem = 0; imagem < listaImagens.length; imagem++) {
-        setTimeout(function () {
-        estrelas.innerHTML = listaImagens[imagem];
-        }, 3000 * imagem);
+            setTimeout(function () {
+                estrelas.innerHTML = listaImagens[imagem];
+            }, 3000);
         }
     }
 </script>
