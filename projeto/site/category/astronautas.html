@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASTRONAUTAS</title>
+    <link rel="icon" href="../Page/assets/LOGO-HOMEPAGE.png">
+    <link rel="stylesheet" href="style/astronautas.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+        <img src="../Page/assets/LOGO-HOMEPAGE.png">
+        <ul>
+            <a href="../index.html">
+                <li>HOME PAGE</li>
+            </a>
+            <li><a href="../index.html#explore">EXPLORE</a></li>
+            <a href="../Page/forum.html">
+                <li>FORUM</li>
+            </a>
+        </ul>
+    </div>
+
+    <div class="main">
+        <span>"Quando você está no espaço, percebe o quão frágil e preciosa é a Terra. Devemos cuidar dela como o
+            tesouro que é." - Alexei Leonov
+        </span>
+    </div>
+
+    <div class="content">
+        <h1>ASTRONAUTAS</h1>
+        <div class="content-text">
+            <div class="content-right">
+                <span>
+                    os astronautas representam a ousadia da humanidade de alcançar o desconhecido. São heróis modernos,
+                    que, com coragem e determinação, abrem caminho para futuras gerações, inspirando sonhos de explorar
+                    as fronteiras finais do universo.
+                </span>
+            </div>
+            <div class="content-left">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/1iqUK5hrFu4?si=hEu0l3zzbXZovCOE"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>ALGUNS ASTRONAUTAS</h1>
+        <div class="content-text">
+            <div class="content-left">
+                <ol>
+                    <li><button onclick="astronauta1()">Neil Armstrong</button></li>
+                    <li><button onclick="astronauta2()">Yuri Gagarin</button></li>
+                    <li><button onclick="astronauta3()">Sally Ride</button></li> <br>
+                    <li><button onclick="astronautarandom()">Astronauta aleatorio!</button></li>
+                    <li><button onclick="todasAstronautas()()">Clique aqui!</button></li>
+                </ol>
+
+            </div>
+            <div id="astronautas" class="content-right">
+                <span>Clique no botão!</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
+    </div>
+</body>
+
+</html>
+
+<script>
+    var listaImagens = [
+        `<img src="assets/astronauta1.png">`,
+        `<img src="assets/astronauta2.png">`,
+        `<img src="assets/astronauta3.png">`
+    ]
+    function astronauta1() {
+        astronautas.innerHTML = listaImagens[0]
+    }
+
+    function astronauta2() {
+        astronautas.innerHTML = listaImagens[1]
+    }
+
+    function astronauta3() {
+        astronautas.innerHTML = listaImagens[2]
+    }
+
+    function astronautarandom() {
+        var NumeroRandom = Math.random();
+        var imagem = parseInt(NumeroRandom * 3);
+
+        astronautas.innerHTML = listaImagens[imagem]
+    }
+
+    function todasAstronautas() {
+        for (let imagem = 0; imagem < listaImagens.length; imagem++) {
+            setTimeout(function () {
+                astronautas.innerHTML = listaImagens[imagem];
+            }, 3000 * imagem);
+        }
+    }
+</script>

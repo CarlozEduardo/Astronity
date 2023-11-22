@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BURACOS NEGROS</title>
+    <link rel="icon" href="../Page/assets/LOGO-HOMEPAGE.png">
+    <link rel="stylesheet" href="style/buraconegro.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+        <img src="../Page/assets/LOGO-HOMEPAGE.png">
+        <ul>
+            <a href="../index.html">
+                <li>HOME PAGE</li>
+            </a>
+            <li><a href="../index.html#explore">EXPLORE</a></li>
+            <a href="../Page/forum.html">
+                <li>FORUM</li>
+            </a>
+        </ul>
+    </div>
+
+    <div class="main">
+        <span>"A gravidade não é responsável por fazer com que as coisas caiam. A gravidade faz com que as coisas,
+            incluindo a luz, sigam curvas e caminhos em torno de buracos negros." - Albert Einstein
+        </span>
+    </div>
+
+    <div class="content">
+        <h1>O QUE SÃO BURACOS NEGROS ?</h1>
+        <div class="content-text">
+            <div class="content-right">
+                <span>
+                    Um buraco negro é uma região do espaço onde a gravidade é tão intensa que nada, nem mesmo a luz,
+                    pode escapar dela. Isso ocorre quando uma grande estrela esgota seu combustível nuclear e entra em
+                    colapso sob a influência de sua própria gravidade.
+                </span>
+            </div>
+            <div class="content-left">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/C9VnAJysiLE?si=CyIaOXOBqsUD3l5s"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>OS 2 TIPOS PRINCIPAIS DE BURACO NEGRO</h1>
+        <div class="content-text">
+            <div class="content-left">
+                <ol>
+                    <li><button onclick="buraconegro1()">Supermassivos</button></li> <br>
+                    <li><button onclick="buraconegro2()">Estelares</button></li>
+                </ol>
+
+            </div>
+            <div id="buraconegros" class="content-right">
+                <span>Clique no botão!</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
+    </div>
+</body>
+
+</html>
+
+<script>
+    var listaImagens = [
+        `<img src="assets/buraconegro1.png">`,
+        `<img src="assets/buraconegro2.png">`
+    ]
+    function buraconegro1() {
+        buraconegros.innerHTML = listaImagens[0]
+    }
+
+    function buraconegro2() {
+        buraconegros.innerHTML = listaImagens[1]
+    }
+</script>

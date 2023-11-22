@@ -87,8 +87,15 @@
             telefoneVar == "" ||
             dtNascVar == ""
         ) {
-            erro_nome.innerHTML =
-                "Algum campo está vazio!";
+            if(nomeVar == "") {
+                erro_nome.innerHTML = "Nome vazio!"
+            } else if (emailVar == "") {
+                erro_email.innerHTML = "Email vazio!"
+            } else if (telefoneVar == "") {
+                erro_telefone.innerHTML = "Telefone vazio!"
+            } else if (dtNascVar == "") {
+                erro_data.innerHTML = "Data vazio!"
+            }
         } else if (nomeVar.length <= 1) {
             erro_nome.innerHTML =
                 "Nome com 1 ou menos caracteres";
@@ -105,7 +112,7 @@
             erro_telefone.innerHTML =
                 "Telefone tem que ter 11 caracteres";
         } else {
-            setInterval(sumirMensagem, 5000);
+            setInterval(sumirMensagem, 3000);
         }
 
         // Enviando o valor da nova input
@@ -148,6 +155,11 @@
     }
 
     function sumirMensagem() {
-        //mensagem_erro.style.color = "none";
+        erro_nome.innerHTML = "";
+        erro_email.innerHTML = "";
+        erro_senha.innerHTML = "";
+        erro_senha2.innerHTML = "";
+        erro_telefone.innerHTML = "";
+        erro_data.innerHTML = "";
     }
 </script>
