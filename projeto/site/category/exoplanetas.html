@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXOPLANETAS</title>
+    <link rel="icon" href="../Page/assets/LOGO-HOMEPAGE.png">
+    <link rel="stylesheet" href="style/exoplanetas.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+        <img src="../Page/assets/LOGO-HOMEPAGE.png">
+        <ul>
+            <a href="../index.html">
+                <li>HOME PAGE</li>
+            </a>
+            <li><a href="../index.html#explore">EXPLORE</a></li>
+            <a href="../Page/forum.html">
+                <li>FORUM</li>
+            </a>
+        </ul>
+    </div>
+
+    <div class="main">
+        <span>"A descoberta de exoplanetas é um lembrete de que não estamos sozinhos no vasto oceano estelar. A
+            humanidade tem um futuro interplanetário." - Elon Musk
+        </span>
+    </div>
+
+    <div class="content">
+        <h1>O QUE SÃO EXOPLANETAS?</h1>
+        <div class="content-text">
+            <div class="content-right">
+                <span>
+                    Em outras palavras, são planetas que estão além do nosso próprio sistema planetário, que inclui a
+                    Terra e outros planetas que orbitam o Sol. A descoberta e estudo de exoplanetas têm sido uma área
+                    emocionante e significativa na astronomia moderna.
+                </span>
+            </div>
+            <div class="content-left">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/d_5_MAqsPOM?si=UQuPqHqUATGj0kx6"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>ALGUNS EXOPLANETAS</h1>
+        <div class="content-text">
+            <div class="content-left">
+                <ol>
+                    <li><button onclick="exo1()">Kepler-442b</button></li>
+                    <li><button onclick="exo2()">Kepler-186f</button></li>
+                    <li><button onclick="exo3()">Kepler-62f</button></li> 
+                    <li><button onclick="exo4()">Proxima Centauri b</button></li>
+                    <li><button onclick="exo5()">HD 40307 g</button></li>
+                    <br>
+                    <li><button onclick="exorandom()">Exoplaneta aleatorio!</button></li>
+                    <li><button onclick="todosExos()">Clique aqui!</button></li>
+                </ol>
+
+            </div>
+            <div id="exos" class="content-right">
+                <span>Clique no botão!</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
+    </div>
+</body>
+
+</html>
+
+<script>
+    var listaImagens = [
+        `<img src="assets/exo1.png">`,
+        `<img src="assets/exo2.png">`,
+        `<img src="assets/exo3.png">`,
+        `<img src="assets/exo4.png">`,
+        `<img src="assets/exo5.png">`
+    ]
+    function exo1() {
+        exos.innerHTML = listaImagens[0]
+    }
+
+    function exo2() {
+        exos.innerHTML = listaImagens[1]
+    }
+
+    function exo3() {
+        exos.innerHTML = listaImagens[2]
+    }
+
+    function exo4() {
+        exos.innerHTML = listaImagens[3]
+    }
+
+    function exo5() {
+        exos.innerHTML = listaImagens[4]
+    }
+
+    function exorandom() {
+        var NumeroRandom = Math.random();
+        var imagem = parseInt(NumeroRandom * 3);
+
+        exos.innerHTML = listaImagens[imagem]
+    }
+
+    function todosExos() {
+        for (let imagem = 0; imagem < listaImagens.length; imagem++) {
+            setTimeout(function () {
+                exos.innerHTML = listaImagens[imagem];
+            }, 3000 * imagem);
+        }
+    }
+</script>
