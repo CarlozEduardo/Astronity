@@ -71,6 +71,7 @@ hr {
   color: black;
   text-align: center;
   font-size: 15px;
+  cursor: pointer;
 }
 
 .card .recuperacao {
@@ -81,4 +82,5 @@ hr {
   background-color: black;
   text-align: center;
   font-size: 15px;
+  cursor: pointer;
 }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORUM</title>
+    <script src="js/sessao.js"></script>
+    <link rel="stylesheet" href="styles/forum.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;500&display=swap" rel="stylesheet">
+</head>
+
+<!-- <body onload="validarSessao()"> -->
+
+<body>
+    <div class="main">
+        <!-- barra da esquerda -->
+        <div class="left-bar">
+            <div class="bar">
+                <div class="logo">
+                    <img src="assets/LOGO.png">
+                </div>
+                <div class="options">
+                    <div class="opt">
+                        <img src="assets/HOME.png">
+                        <a href="../index.html"><span>Blog</span></a>
+                    </div>
+                    <div class="opt">
+                        <img src="assets/COMMUNITY.png">
+                        <span><b>Forum</b></span>
+                    </div>
+                    <div class="opt">
+                        <img src="assets/NOTIFICATION.png">
+                        <span>Quiz</span>
+                    </div>
+                </div>
+                <div class="button">
+                    <button onclick="limparSessao()" class="post">Sair da conta</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Centro do site  -->
+        <div class="center">
+            <div class="header">
+                <h3><span id="b_usuario">usuario</span></h3>
+            </div>
+            <hr>
+            <div class="posts"></div>
+        </div>
+
+        <!-- Barra da direita -->
+        <div class="right-bar">
+            <div class="search-fixed">
+                <input class="search" type="text" placeholder="    Buscar">
+            </div>
+            <div class="postagem">
+                <h3>Publicar no feed</h3>
+                <div class="div-form">
+                    <form id="form_postagem" method="post" onsubmit="return publicar()">
+                        <label>
+                            Título:
+                            <br>
+                            <input name="titulo" id="titulo" maxlength="100" type="text">
+                        </label>
+                        <br>
+                        <label>
+                            Descrição (máximo de 250 caracteres):
+                            <br>
+                            <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
+                        </label>
+                        <br>
+                        <button>Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

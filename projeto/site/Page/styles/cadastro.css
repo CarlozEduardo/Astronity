@@ -89,6 +89,7 @@ hr {
   color: black;
   text-align: center;
   font-size: 15px;
+  cursor: pointer;
 }
 .card .ending span {
   width: 30%;

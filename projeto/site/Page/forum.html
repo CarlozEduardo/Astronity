@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Astronity</title>
+    <title>FORUM</title>
     <script src="js/sessao.js"></script>
     <link rel="stylesheet" href="styles/forum.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;500&display=swap" rel="stylesheet">
 </head>
 
-<body onload="validarSessao()">
+<!-- <body onload="validarSessao()"> -->
+
+<body onload="atualizarFeed()">
     <div class="main">
         <!-- barra da esquerda -->
         <div class="left-bar">
@@ -23,23 +25,23 @@
                 <div class="options">
                     <div class="opt">
                         <img src="assets/HOME.png">
-                        <span><b>Início</b></span>
-                    </div>
-                    <div class="opt">
-                        <img src="assets/NOTIFICATION.png">
-                        <span>Notificações</span>
+                        <a href="../index.html"><span>Blog</span></a>
                     </div>
                     <div class="opt">
                         <img src="assets/COMMUNITY.png">
-                        <span>Comunidades</span>
+                        <span><b>Forum</b></span>
                     </div>
                     <div class="opt">
-                        <img src="assets/IMAGE.png">
-                        <span>Imagens</span>
+                        <img src="assets/NOTIFICATION.png">
+                        <span><a href="quiz.html">Quiz</a></span>
+                    </div>
+                    <div class="opt">
+                        <img src="assets/NOTIFICATION.png">
+                        <span>Avaliação</span>
                     </div>
                 </div>
                 <div class="button">
-                    <button class="post">Postar</button>
+                    <button onclick="limparSessao()" class="post">Sair da conta</button>
                 </div>
             </div>
         </div>
@@ -47,9 +49,10 @@
         <!-- Centro do site  -->
         <div class="center">
             <div class="header">
-                <span>Início</span>
+                <h3><span id="b_usuario">usuario</span></h3>
             </div>
-            <div class="posts"></div>
+            <hr>
+            <div class="feed_container"></div>
         </div>
 
         <!-- Barra da direita -->
@@ -57,8 +60,173 @@
             <div class="search-fixed">
                 <input class="search" type="text" placeholder="    Buscar">
             </div>
+            <div class="postagem">
+                <h3>Publicar no feed</h3>
+                <div class="div-form">
+                    <form id="form_postagem" method="post" onsubmit="return publicar()">
+                        <label>
+                            Título:
+                            <br>
+                            <input name="titulo" id="titulo" maxlength="100" type="text">
+                        </label>
+                        <br>
+                        <label>
+                            Descrição (máximo de 250 caracteres):
+                            <br>
+                            <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
+                        </label>
+                        <br>
+                        <button>Enviar</button>
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
 </body>
 
 </html>
+
+<script>
+
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+    function limparFormulario() {
+        document.getElementById("form_postagem").reset();
+    }
+
+    function publicar() {
+        var idUsuario = sessionStorage.ID_USUARIO;
+
+        var corpo = {
+            titulo: form_postagem.titulo.value,
+            descricao: form_postagem.descricao.value
+        }
+
+        fetch(`/forum/publicar/${idUsuario}`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(corpo)
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
+                window.location = "forum.html";
+                limparFormulario();
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+
+        return false;
+
+    }
+
+    function editar(idPost) {
+        sessionStorage.ID_POSTAGEM_EDITANDO = idPost;
+        console.log("cliquei em editar - " + idPost);
+        window.alert("Você será redirecionado à página de edição do aviso de id número: " + idPost);
+        window.location = "/dashboard/edicao-aviso.html"
+    }
+
+    function deletar(idPost) {
+        console.log("Criar função de apagar post escolhido - ID" + idPost);
+        fetch(`/forum/deletar/${idPost}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+                window.location = "/dashboard/mural.html"
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+    function atualizarFeed() {
+        fetch("/forum/listar").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    var feed = document.getElementById("feed_container");
+                    feed.innerHTML = "";
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+                        // criando e manipulando elementos do HTML via JavaScript
+                        var divPublicacao = document.createElement("div");
+                        var spanID = document.createElement("span");
+                        var spanTitulo = document.createElement("span");
+                        var spanNome = document.createElement("span");
+                        var divDescricao = document.createElement("div");
+                        var divButtons = document.createElement("div");
+                        var btnEditar = document.createElement("button");
+                        var btnDeletar = document.createElement("button");
+
+
+                        spanID.innerHTML = "ID: <b>" + publicacao.idPost + "</b>";
+                        spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
+                        spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
+                        divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
+                        btnEditar.innerHTML = "Editar";
+                        btnDeletar.innerHTML = "Deletar";
+
+                        divPublicacao.className = "publicacao";
+                        spanTitulo.id = "inputNumero" + publicacao.idPost;
+                        spanNome.className = "publicacao-nome";
+                        spanTitulo.className = "publicacao-titulo";
+                        divDescricao.className = "publicacao-descricao";
+
+                        divButtons.className = "div-buttons"
+
+                        btnEditar.className = "publicacao-btn-editar"
+                        btnEditar.id = "btnEditar" + publicacao.idPost;
+                        btnEditar.setAttribute("onclick", `editar(${publicacao.idPost})`);
+
+                        btnDeletar.className = "publicacao-btn-editar"
+                        btnDeletar.id = "btnDeletar" + publicacao.idPost;
+                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idPost})`);
+
+                        divPublicacao.appendChild(spanID);
+                        divPublicacao.appendChild(spanNome);
+                        divPublicacao.appendChild(spanTitulo);
+                        divPublicacao.appendChild(divDescricao);
+                        divPublicacao.appendChild(divButtons);
+                        divButtons.appendChild(btnEditar);
+                        divButtons.appendChild(btnDeletar);
+                        feed.appendChild(divPublicacao);
+                    }
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+    }
+
+</script>

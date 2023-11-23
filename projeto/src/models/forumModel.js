@@ -28,7 +28,7 @@ function pesquisarDescricao(texto) {
   );
   var instrucao = `
         SELECT 
-            a.id AS idAviso,
+            a.id AS idPost,
             a.titulo,
             a.descricao,
             a.fk_usuario,
@@ -36,7 +36,7 @@ function pesquisarDescricao(texto) {
             u.nome,
             u.email,
             u.senha
-        FROM aviso a
+        FROM postagem a
             INNER JOIN usuario u
                 ON a.fk_usuario = u.id
         WHERE a.descricao LIKE '${texto}';
@@ -51,7 +51,7 @@ function listarPorUsuario(idUsuario) {
   );
   var instrucao = `
         SELECT 
-            a.id AS idAviso,
+            a.id AS idPost,
             a.titulo,
             a.descricao,
             a.fk_usuario,
@@ -59,7 +59,7 @@ function listarPorUsuario(idUsuario) {
             u.nome,
             u.email,
             u.senha
-        FROM aviso a
+        FROM postagem a
             INNER JOIN usuario u
                 ON a.fk_usuario = u.id
         WHERE u.id = ${idUsuario};
@@ -76,17 +76,17 @@ function publicar(titulo, descricao, idUsuario) {
     idUsuario
   );
   var instrucao = `
-        INSERT INTO aviso (titulo, descricao, fkUsuario) VALUES ('${titulo}', '${descricao}', ${idUsuario});
+        INSERT INTO postagem (titulo, descricao, fkUsuario) VALUES ('${titulo}', '${descricao}', ${idUsuario});
     `;
   console.log("Executando a instrução SQL: \n" + instrucao);
   return database.executar(instrucao);
 }
 
-function editar(novaDescricao, idAviso) {
+function editar(novaDescricao, idPost) {
   console.log(
     "ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function editar(): ",
     novaDescricao,
-    idAviso
+    idPost
   );
   var instrucao = `
         UPDATE postagem SET descricao = '${novaDescricao}' WHERE id = ${idPost};
@@ -95,13 +95,13 @@ function editar(novaDescricao, idAviso) {
   return database.executar(instrucao);
 }
 
-function deletar(idAviso) {
+function deletar(idPost) {
   console.log(
     "ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():",
-    idAviso
+    idPost
   );
   var instrucao = `
-        DELETE FROM aviso WHERE id = ${idAviso};
+        DELETE FROM postagem WHERE id = ${idPost};
     `;
   console.log("Executando a instrução SQL: \n" + instrucao);
   return database.executar(instrucao);

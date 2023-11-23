@@ -18,20 +18,6 @@ fkUsuario INT,
 CONSTRAINT fkPost FOREIGN KEY (fkUsuario)
 REFERENCES usuario(idUsuario));
 
-CREATE TABLE comentario (
-idComentario INT,
-descricao VARCHAR(100),
-fkUsuarioComentario INT,
-fkPost INT,
-fkUsuarioPost INT,
-FOREIGN KEY (fkUsuarioComentario)
-REFERENCES usuario(idUsuario),
-FOREIGN KEY (fkPost)
-REFERENCES postagem(idPost),
-FOREIGN KEY (fkUsuarioPost)
-REFERENCES postagem(fkUsuario),
-PRIMARY KEY (idComentario, fkUsuarioPost, fkPost, fkUsuarioComentario));
-
 CREATE TABLE avaliacao (
     idAvaliacao INT PRIMARY KEY AUTO_INCREMENT,
     nota DECIMAL(2,1),
