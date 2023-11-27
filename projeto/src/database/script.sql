@@ -1,5 +1,4 @@
 CREATE DATABASE astronity;
-
 USE astronity;
 
 CREATE TABLE usuario (
@@ -10,10 +9,10 @@ senha VARCHAR(50),
 telefone CHAR(20),
 dtNasc DATE);
 
-CREATE TABLE postagem (
-idPost INT PRIMARY KEY AUTO_INCREMENT,
-titulo VARCHAR (50),
-descricao VARCHAR(200),
+CREATE TABLE jogo (
+idPartida INT PRIMARY KEY AUTO_INCREMENT,
+ponto INT,
+partida INT,
 fkUsuario INT,
 CONSTRAINT fkPost FOREIGN KEY (fkUsuario)
 REFERENCES usuario(idUsuario));

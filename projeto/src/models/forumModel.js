@@ -6,17 +6,17 @@ function listar() {
   );
   var instrucao = `
         SELECT 
-            p.idPost AS idPostagem,
+            p.idPost AS idPost,
             p.titulo,
             p.descricao,
-            p.fk_usuario,
+            p.fkUsuario,
             u.idUsuario,
             u.nome,
             u.email,
             u.senha
         FROM postagem p
             INNER JOIN usuario u
-                ON p.fkusuario = u.id;
+                ON p.fkusuario = u.idUsuario ORDER BY p.idPost DESC;
     `;
   console.log("Executando a instrução SQL: \n" + instrucao);
   return database.executar(instrucao);
@@ -31,14 +31,14 @@ function pesquisarDescricao(texto) {
             a.id AS idPost,
             a.titulo,
             a.descricao,
-            a.fk_usuario,
+            a.fkUsuario,
             u.id AS idUsuario,
             u.nome,
             u.email,
             u.senha
         FROM postagem a
             INNER JOIN usuario u
-                ON a.fk_usuario = u.id
+                ON a.fkUsuario = u.idUsuario
         WHERE a.descricao LIKE '${texto}';
     `;
   console.log("Executando a instrução SQL: \n" + instrucao);
@@ -54,15 +54,15 @@ function listarPorUsuario(idUsuario) {
             a.id AS idPost,
             a.titulo,
             a.descricao,
-            a.fk_usuario,
-            u.id AS idUsuario,
+            a.fkUsuario,
+            u.idUsuario,
             u.nome,
             u.email,
             u.senha
         FROM postagem a
             INNER JOIN usuario u
-                ON a.fk_usuario = u.id
-        WHERE u.id = ${idUsuario};
+                ON a.fkUsuario = u.idUsuario
+        WHERE u.idUsuario = ${idUsuario};
     `;
   console.log("Executando a instrução SQL: \n" + instrucao);
   return database.executar(instrucao);
@@ -101,7 +101,7 @@ function deletar(idPost) {
     idPost
   );
   var instrucao = `
-        DELETE FROM postagem WHERE id = ${idPost};
+        DELETE FROM postagem WHERE idPost = ${idPost};
     `;
   console.log("Executando a instrução SQL: \n" + instrucao);
   return database.executar(instrucao);

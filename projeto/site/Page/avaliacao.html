@@ -28,16 +28,12 @@
                         <a href="../index.html"><span>Blog</span></a>
                     </div>
                     <div class="opt">
-                        <img src="assets/COMMUNITY.png">
-                        <span><b>Forum</b></span>
+                        <img src="assets/NOTIFICATION.png">
+                        <span><a href="minigame.html">Mini-game</a></span>
                     </div>
                     <div class="opt">
                         <img src="assets/NOTIFICATION.png">
-                        <span><a href="quiz.html">Quiz</a></span>
-                    </div>
-                    <div class="opt">
-                        <img src="assets/NOTIFICATION.png">
-                        <span>Avaliação</span>
+                        <span><b>Avaliação</b></span>
                     </div>
                 </div>
                 <div class="button">
@@ -49,10 +45,10 @@
         <!-- Centro do site  -->
         <div class="center">
             <div class="header">
-                <h3><span id="b_usuario">usuario</span></h3>
+                <h3>Olá <span id="b_usuario">usuario</span>!</h3>
             </div>
             <hr>
-            <div class="feed_container"></div>
+            <div id="feedContainer" class="feed_container"></div>
         </div>
 
         <!-- Barra da direita -->
@@ -61,7 +57,7 @@
                 <input class="search" type="text" placeholder="    Buscar">
             </div>
             <div class="postagem">
-                <h3>Publicar no feed</h3>
+                <h3>Avalie a Astronity</h3>
                 <div class="div-form">
                     <form id="form_postagem" method="post" onsubmit="return publicar()">
                         <label>
@@ -146,7 +142,6 @@
 
             if (resposta.ok) {
                 window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
-                window.location = "/dashboard/mural.html"
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {
@@ -161,7 +156,7 @@
         fetch("/forum/listar").then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
-                    var feed = document.getElementById("feed_container");
+                    var feed = document.getElementById("feedContainer");
                     var mensagem = document.createElement("span");
                     mensagem.innerHTML = "Nenhum resultado encontrado."
                     feed.appendChild(mensagem);
@@ -171,7 +166,7 @@
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-                    var feed = document.getElementById("feed_container");
+                    var feed = document.getElementById("feedContainer");
                     feed.innerHTML = "";
                     for (let i = 0; i < resposta.length; i++) {
                         var publicacao = resposta[i];
