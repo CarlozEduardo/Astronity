@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FORUM</title>
     <script src="js/sessao.js"></script>
-    <link rel="stylesheet" href="styles/forum.css">
+    <link rel="stylesheet" href="styles/avaliacao.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;500&display=swap" rel="stylesheet">
@@ -28,11 +28,11 @@
                         <a href="../index.html"><span>Blog</span></a>
                     </div>
                     <div class="opt">
-                        <img src="assets/NOTIFICATION.png">
+                        <img src="assets/controle.png">
                         <span><a href="minigame.html">Mini-game</a></span>
                     </div>
                     <div class="opt">
-                        <img src="assets/NOTIFICATION.png">
+                        <img src="assets/estrela.png">
                         <span><b>Avaliação</b></span>
                     </div>
                 </div>
@@ -53,17 +53,14 @@
 
         <!-- Barra da direita -->
         <div class="right-bar">
-            <div class="search-fixed">
-                <input class="search" type="text" placeholder="    Buscar">
-            </div>
             <div class="postagem">
                 <h3>Avalie a Astronity</h3>
                 <div class="div-form">
                     <form id="form_postagem" method="post" onsubmit="return publicar()">
                         <label>
-                            Título:
+                            Nota:
                             <br>
-                            <input name="titulo" id="titulo" maxlength="100" type="text">
+                            <input name="titulo" id="nota" maxlength="100" type="text">
                         </label>
                         <br>
                         <label>
@@ -93,7 +90,7 @@
         var idUsuario = sessionStorage.ID_USUARIO;
 
         var corpo = {
-            titulo: form_postagem.titulo.value,
+            nota: Number(form_postagem.nota.value),
             descricao: form_postagem.descricao.value
         }
 
@@ -109,7 +106,7 @@
 
             if (resposta.ok) {
                 window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
-                window.location = "forum.html";
+                window.location = "avaliacao.html";
                 limparFormulario();
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
@@ -122,34 +119,6 @@
 
         return false;
 
-    }
-
-    function editar(idPost) {
-        sessionStorage.ID_POSTAGEM_EDITANDO = idPost;
-        console.log("cliquei em editar - " + idPost);
-        window.alert("Você será redirecionado à página de edição do aviso de id número: " + idPost);
-        window.location = "/dashboard/edicao-aviso.html"
-    }
-
-    function deletar(idPost) {
-        console.log("Criar função de apagar post escolhido - ID" + idPost);
-        fetch(`/forum/deletar/${idPost}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(function (resposta) {
-
-            if (resposta.ok) {
-                window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
-            } else if (resposta.status == 404) {
-                window.alert("Deu 404!");
-            } else {
-                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
-            }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-        });
     }
 
     function atualizarFeed() {
@@ -173,45 +142,22 @@
 
                         // criando e manipulando elementos do HTML via JavaScript
                         var divPublicacao = document.createElement("div");
-                        var spanID = document.createElement("span");
                         var spanTitulo = document.createElement("span");
                         var spanNome = document.createElement("span");
                         var divDescricao = document.createElement("div");
-                        var divButtons = document.createElement("div");
-                        var btnEditar = document.createElement("button");
-                        var btnDeletar = document.createElement("button");
 
-
-                        spanID.innerHTML = "ID: <b>" + publicacao.idPost + "</b>";
-                        spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
+                        spanTitulo.innerHTML = "Nota: <b>" + publicacao.nota + "</b>";
                         spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
                         divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
-                        btnEditar.innerHTML = "Editar";
-                        btnDeletar.innerHTML = "Deletar";
 
                         divPublicacao.className = "publicacao";
-                        spanTitulo.id = "inputNumero" + publicacao.idPost;
                         spanNome.className = "publicacao-nome";
                         spanTitulo.className = "publicacao-titulo";
                         divDescricao.className = "publicacao-descricao";
 
-                        divButtons.className = "div-buttons"
-
-                        btnEditar.className = "publicacao-btn-editar"
-                        btnEditar.id = "btnEditar" + publicacao.idPost;
-                        btnEditar.setAttribute("onclick", `editar(${publicacao.idPost})`);
-
-                        btnDeletar.className = "publicacao-btn-editar"
-                        btnDeletar.id = "btnDeletar" + publicacao.idPost;
-                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idPost})`);
-
-                        divPublicacao.appendChild(spanID);
                         divPublicacao.appendChild(spanNome);
                         divPublicacao.appendChild(spanTitulo);
                         divPublicacao.appendChild(divDescricao);
-                        divPublicacao.appendChild(divButtons);
-                        divButtons.appendChild(btnEditar);
-                        divButtons.appendChild(btnDeletar);
                         feed.appendChild(divPublicacao);
                     }
 

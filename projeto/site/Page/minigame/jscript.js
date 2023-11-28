@@ -223,7 +223,8 @@ function gerenciaGame() {
     clearInterval(tmpCriaIni);
     telaMsg.style.display = "block";
 
-    partida++;
+    partidaVar++;
+    registrarPartida();
     window.location.href = "../minigame.html";
   }
   if (vidaPlaneta <= 0) {
@@ -232,6 +233,7 @@ function gerenciaGame() {
     telaMsg.style.display = "block";
 
     partidaVar++;
+    registrarPartida();
     window.location.href = "../minigame.html";
   }
 }
@@ -241,8 +243,9 @@ function gameLoop() {
     controlaJogador();
     controlaTirosJogador();
     controlaBomba();
+    gerenciaGame();
   }
-  gerenciaGame();
+
   frames = requestAnimationFrame(gameLoop);
 }
 

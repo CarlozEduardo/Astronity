@@ -7,4 +7,8 @@ router.post("/registrarPartida", function (req, res) {
   rankController.registrarPartida(req, res);
 });
 
+router.get("/listar", function (req, res) {
+  rankController.listar(req, res);
+});
+
 module.exports = router;

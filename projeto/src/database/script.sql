@@ -26,12 +26,11 @@ CREATE TABLE avaliacao (
     REFERENCES usuario(idUsuario)
 );
 
-CREATE TABLE ocupacao (
-    idOcupacao INT,
-    ocupacao VARCHAR(20),
-    instituicao VARCHAR(50),
-    fkUsuario INT,
-    PRIMARY KEY(fkUsuario, idOcupacao)
-);
-
 SELECT * FROM usuario;
+SELECT * FROM jogo;
+
+SELECT SUM(j.ponto) total_pontos, SUM(j.partida) total_partidas, u.idUsuario, u.nome
+FROM jogo j
+INNER JOIN usuario u ON j.fkUsuario = u.idUsuario
+GROUP BY u.idUsuario
+ORDER BY total_pontos DESC;

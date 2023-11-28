@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FORUM</title>
     <script src="js/sessao.js"></script>
-    <link rel="stylesheet" href="styles/forum.css">
+    <link rel="stylesheet" href="styles/minigame.css">
     <link rel="stylesheet" href="minigame/estilos.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
 
 <!-- <body onload="validarSessao()"> -->
 
-<body onload="validarSessao()">
+<body onload="validarSessao(), atualizarTop()">
     <div class="main">
         <!-- barra da esquerda -->
         <div class="left-bar">
@@ -29,11 +29,11 @@
                         <a href="../index.html"><span>Blog</span></a>
                     </div>
                     <div class="opt">
-                        <img src="assets/NOTIFICATION.png">
+                        <img src="assets/controle.png">
                         <span><b>Mini-game</b></span>
                     </div>
                     <div class="opt">
-                        <img src="assets/NOTIFICATION.png">
+                        <img src="assets/estrela.png">
                         <span><a href="avaliacao.html">Avaliação</a></span>
                     </div>
                 </div>
@@ -50,12 +50,22 @@
             </div>
             <hr>
             <div class="posts">
+                <h3>Salve o Planeta</h3>
+
+                <span>O objetivo do jogo é salvar o planeta de uma ataque misterioso. <br>
+                    Comandos:<br>
+                    - Setas direcionais para mover a nave. <br>
+                    - Barra de espaço para atirar.
+                </span>
+                <br>
+                <button onclick="redirecionarPag()">Jogar</button>
             </div>
         </div>
 
         <!-- Barra da direita -->
         <div class="right-bar">
-
+            <h3>Top points</h3> <br>
+            <div id="feedContainer" class="feed_container"></div>
         </div>
 </body>
 
@@ -63,4 +73,62 @@
 
 <script>
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+    function redirecionarPag() {
+        window.location.href = "minigame/game.html";
+    }
+
+    function atualizarTop() {
+        fetch("/rank/listar").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feedContainer");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    var feed = document.getElementById("feedContainer");
+                    feed.innerHTML = "";
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+                        // criando e manipulando elementos do HTML via JavaScript
+                        var divPublicacao = document.createElement("div");
+                        var spanTOP = document.createElement("span")
+                        var spanID = document.createElement("span");
+                        var spanTitulo = document.createElement("span");
+                        var spanNome = document.createElement("span");
+                        var espaco = document.createElement("br")
+
+                        spanTOP.innerHTML = `TOP ${i + 1}`
+                        spanID.innerHTML = "Nome: <b>" + publicacao.nome + "</b>";
+                        spanTitulo.innerHTML = "Points: <b>" + publicacao.total_pontos + "</b>";
+                        spanNome.innerHTML = "Partidas: <b>" + publicacao.total_partidas + "</b>";
+
+                        divPublicacao.className = "publicacao";
+                        spanID.id = "inputNumero" + publicacao.idPost;
+                        spanNome.className = "publicacao-nome";
+                        spanTitulo.className = "publicacao-titulo";
+
+                        divPublicacao.appendChild(spanTOP)
+                        divPublicacao.appendChild(spanID);
+                        divPublicacao.appendChild(spanTitulo);
+                        divPublicacao.appendChild(spanNome);
+                        feed.appendChild(divPublicacao);
+                        feed.appendChild(espaco)
+                    }
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+    }
 </script>

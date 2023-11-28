@@ -29,7 +29,6 @@
             </div>
             <hr>
             <button class="entrar" onclick="entrar()">Entrar</button>
-            <button class="recuperacao" onclick="recuperacao()">Esqueceu sua senha ?</button>
             <span>Não tem uma conta? <a href="Cadastro.html">Cadastre-se aqui !</a></span>
         </div>
     </div>
@@ -38,18 +37,13 @@
 
 </html>
 <script>
-    function recuperacao() {
-        window.location.assign(recuperacao.html)
-    }
-
     function entrar() {
 
         var emailVar = input_email.value;
         var senhaVar = input_senha.value;
 
         if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "";
+            alert("campos vazios!")
         }
         else {
             setInterval(sumirMensagem, 5000)
@@ -89,6 +83,8 @@
                 });
 
             } else {
+
+                alert("Erro conta não encontrada!")
 
                 console.log("Houve um erro ao tentar realizar o login!");
 
