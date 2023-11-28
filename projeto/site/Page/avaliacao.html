@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FORUM</title>
+
     <script src="js/sessao.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <link rel="stylesheet" href="styles/avaliacao.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +17,7 @@
 
 <!-- <body onload="validarSessao()"> -->
 
-<body onload="atualizarFeed()">
+<body onload="atualizarFeed(), obterDadosGrafico()">
     <div class="main">
         <!-- barra da esquerda -->
         <div class="left-bar">
@@ -72,7 +75,10 @@
                         <button>Enviar</button>
                     </form>
                 </div>
-                <div id="grafico">
+                <br>
+                <div class="grafico">
+                    <hr>
+                    <h4>Grafico de usuarios</h4>
                     <canvas id="canvas_chart"></canvas>
                 </div>
             </div>
@@ -90,15 +96,14 @@
     }
 
     function publicar() {
-        var Nota =  Number(form_postagem.nota.value)
+        var Nota = Number(form_postagem.nota.value);
+        var idUsuario = sessionStorage.ID_USUARIO;
 
-        if (Nota >= 0 && Nota <= 5) {
-            Nota = undefined
-        } else {
-            alert("Nota soamente entre 1 a 5")
+        if (Nota < 0 || Nota > 5) {
+            alert("Nota somente entre 1 a 5");
+            return false; // Impede a continuação da função
         }
 
-        var idUsuario = sessionStorage.ID_USUARIO;
         var corpo = {
             nota: Nota,
             descricao: form_postagem.descricao.value
@@ -111,85 +116,80 @@
             },
             body: JSON.stringify(corpo)
         }).then(function (resposta) {
-
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
+                window.alert("Post realizado com sucesso pelo usuário de ID: " + idUsuario + "!");
                 window.location = "avaliacao.html";
                 limparFormulario();
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {
-                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
-                alert("Você já postou uma avaliação!")
+                throw new Error("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
             }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
+        }).catch(function (erro) {
+            console.log(`#ERRO: ${erro.message}`);
         });
 
         return false;
-
     }
 
     function atualizarFeed() {
-        fetch("/forum/listar").then(function (resposta) {
-            if (resposta.ok) {
-                if (resposta.status == 204) {
-                    var feed = document.getElementById("feedContainer");
-                    var mensagem = document.createElement("span");
-                    mensagem.innerHTML = "Nenhum resultado encontrado."
-                    feed.appendChild(mensagem);
-                    throw "Nenhum resultado encontrado!!";
-                }
-
-                resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
-
-                    var feed = document.getElementById("feedContainer");
-                    feed.innerHTML = "";
-                    for (let i = 0; i < resposta.length; i++) {
-                        var publicacao = resposta[i];
-
-                        // criando e manipulando elementos do HTML via JavaScript
-                        var divPublicacao = document.createElement("div");
-                        var spanTitulo = document.createElement("span");
-                        var spanNome = document.createElement("span");
-                        var divDescricao = document.createElement("div");
-
-                        spanTitulo.innerHTML = "Nota: <b>" + publicacao.nota + "</b>";
-                        spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
-                        divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
-
-                        divPublicacao.className = "publicacao";
-                        spanNome.className = "publicacao-nome";
-                        spanTitulo.className = "publicacao-titulo";
-                        divDescricao.className = "publicacao-descricao";
-
-                        divPublicacao.appendChild(spanNome);
-                        divPublicacao.appendChild(spanTitulo);
-                        divPublicacao.appendChild(divDescricao);
-                        feed.appendChild(divPublicacao);
+        fetch("/forum/listar")
+            .then(function (resposta) {
+                if (resposta.ok) {
+                    if (resposta.status == 204) {
+                        var feed = document.getElementById("feedContainer");
+                        var mensagem = document.createElement("span");
+                        mensagem.innerHTML = "Nenhum resultado encontrado."
+                        feed.appendChild(mensagem);
+                        throw new Error("Nenhum resultado encontrado!!");
                     }
 
-                });
-            } else {
-                throw ('Houve um erro na API!');
-            }
-        }).catch(function (resposta) {
-            console.error(resposta);
-        });
+                    return resposta.json();
+                } else {
+                    throw new Error('Houve um erro na API!');
+                }
+            })
+            .then(function (resposta) {
+                console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                var feed = document.getElementById("feedContainer");
+                feed.innerHTML = "";
+                for (let i = 0; i < resposta.length; i++) {
+                    var publicacao = resposta[i];
+
+                    // Criação de elementos HTML via JavaScript
+                    var divPublicacao = document.createElement("div");
+                    var spanTitulo = document.createElement("span");
+                    var spanNome = document.createElement("span");
+                    var divDescricao = document.createElement("div");
+
+                    spanTitulo.innerHTML = "Nota: <b>" + publicacao.nota + "</b>";
+                    spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
+                    divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
+
+                    divPublicacao.className = "publicacao";
+                    spanNome.className = "publicacao-nome";
+                    spanTitulo.className = "publicacao-titulo";
+                    divDescricao.className = "publicacao-descricao";
+
+                    divPublicacao.appendChild(spanNome);
+                    divPublicacao.appendChild(spanTitulo);
+                    divPublicacao.appendChild(divDescricao);
+                    feed.appendChild(divPublicacao);
+                }
+            })
+            .catch(function (erro) {
+                console.error(erro);
+            });
     }
 
     // GRAFICO
 
-    const ctx01 = document.getElementById('canvas_chart01');
-
-    window.onload = obterDadosGrafico();
-
     function obterDadosGrafico() {
 
-        fetch(`/medidas/ultimas`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/forum/ultimas`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -206,9 +206,6 @@
             });
     }
 
-    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
-    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
     function plotarGrafico(resposta) {
         // Criando estrutura para plotar gráfico - labels
         let labels = [];
@@ -219,8 +216,6 @@
             datasets: [{
                 label: 'Ocupacoes',
                 data: [],
-                fill: false,
-                borderColor: 'rgb(75, 192, 192)',
                 tension: 0.1
             }]
         };
@@ -229,16 +224,8 @@
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
             labels.push(registro.nome);
-            dados.datasets[0].data.push(registro.qtdOcupacoes);
+            dados.datasets[0].data.push(registro.ocupacoes);
         }
-
-        console.log('----------------------------------------------')
-        console.log('O gráfico será plotado com os respectivos valores:')
-        console.log('Labels:')
-        console.log(labels)
-        console.log('Dados:')
-        console.log(dados.datasets)
-        console.log('----------------------------------------------')
 
         // Criando estrutura para plotar gráfico - config
         const config = {
@@ -248,7 +235,7 @@
 
         // Adicionando gráfico criado em div na tela
         let myChart = new Chart(
-            document.getElementById(`myChartCanvas`),
+            document.getElementById(`canvas_chart`),
             config
         );
     }

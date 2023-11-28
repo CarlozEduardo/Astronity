@@ -37,7 +37,7 @@ CREATE TABLE avaliacao (
 INSERT INTO ocupacao(nome) VALUES
 ('Professor'),
 ('Estudante'),
-('Fã');
+('Amante');
 
 -- SELECT's
 
@@ -50,3 +50,5 @@ FROM jogo j
 INNER JOIN usuario u ON j.fkUsuario = u.idUsuario
 GROUP BY u.idUsuario
 ORDER BY total_pontos DESC;
+
+SELECT o.nome, COUNT(u.ocupacao) AS ocupacoes FROM ocupacao as o JOIN usuario as u ON ocupacao = idOcupacao GROUP BY idOcupacao;

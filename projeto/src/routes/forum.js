@@ -10,4 +10,9 @@ router.get("/listar", function (req, res) {
 router.post("/publicar/:idUsuario", function (req, res) {
   forumController.publicar(req, res);
 });
+
+router.get("/ultimas", function (req, res) {
+  forumController.buscarUltimasMedidas(req, res);
+});
+
 module.exports = router;

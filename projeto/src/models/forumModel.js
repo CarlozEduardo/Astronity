@@ -33,7 +33,18 @@ function publicar(nota, descricao, idUsuario) {
   return database.executar(instrucao);
 }
 
+function buscarUltimasMedidas() {
+  var instrucaoSql = `
+  SELECT o.nome, COUNT(u.ocupacao) AS ocupacoes 
+  FROM ocupacao as o JOIN usuario as u 
+  ON ocupacao = idOcupacao GROUP BY idOcupacao`;
+
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
 module.exports = {
   listar,
   publicar,
+  buscarUltimasMedidas,
 };
