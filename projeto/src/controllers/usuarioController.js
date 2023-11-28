@@ -40,7 +40,7 @@ function cadastrar(req, res) {
   var nome = req.body.nomeServer;
   var email = req.body.emailServer;
   var senha = req.body.senhaServer;
-  var telefone = req.body.telefoneServer;
+  var ocupacao = req.body.ocupacaoServer;
   var dtNasc = req.body.dtNascServer;
 
   // Faça as validações dos valores
@@ -50,14 +50,14 @@ function cadastrar(req, res) {
     res.status(400).send("Seu email está undefined!");
   } else if (senha == undefined) {
     res.status(400).send("Sua senha está undefined!");
-  } else if (telefone == undefined) {
+  } else if (ocupacao == undefined) {
     res.status(400).send("Sua empresa está undefined!");
   } else if (dtNasc == undefined) {
     res.status(400).send("Seu cpf está undefined!");
   } else {
     // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
     usuarioModel
-      .cadastrar(nome, email, senha, telefone, dtNasc)
+      .cadastrar(nome, email, senha, ocupacao, dtNasc)
       .then(function (resultado) {
         res.json(resultado);
       })
@@ -72,7 +72,14 @@ function cadastrar(req, res) {
   }
 }
 
+function listar(req, res) {
+  usuarioModel.listar().then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
+
 module.exports = {
   autenticar,
   cadastrar,
+  listar,
 };

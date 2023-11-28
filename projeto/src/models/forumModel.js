@@ -5,8 +5,7 @@ function listar() {
     "ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()"
   );
   var instrucao = `
-        SELECT 
-            a.idAvaliacao,
+        SELECT
             a.nota,
             a.descricao,
             a.fkUsuario,
@@ -14,7 +13,7 @@ function listar() {
             u.nome
         FROM avaliacao a
             INNER JOIN usuario u
-                ON a.fkUsuario = u.idUsuario ORDER BY a.idAvaliacao DESC;
+                ON a.fkUsuario = u.idUsuario ORDER BY a.nota DESC;
     `;
   console.log("Executando a instrução SQL: \n" + instrucao);
   return database.executar(instrucao);
